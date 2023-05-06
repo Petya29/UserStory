@@ -35,7 +35,12 @@ export const StoryAddInput = ({ prevOrder, handleAddStory }: StoryAddInputProps)
         }
 
         handleAddStory({ ...newStory, id: crypto.randomUUID() });
-            // TODO save to db
+        setNewStory({
+            id: '',
+            orderId: prevOrder + 1,
+            title: '',
+            subStories: []
+        });
     }
 
     return (

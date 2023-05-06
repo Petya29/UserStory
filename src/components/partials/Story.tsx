@@ -2,6 +2,7 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { IStory } from "../../models";
 import { ArrowDownIcon, ArrowUpIcon, DocumentMinusIcon, MinusIcon, PlusIcon, TrashIcon } from "../ui/data-display";
 import { StoryAddInput } from "./StoryAddInput";
+import { SubList } from "./SubList";
 import { useState } from "react";
 
 type StoryProps = {
@@ -34,6 +35,36 @@ export const Story = ({
 
   const handleAddSubStory = (newStory: IStory) => {
     const editedStory = { ...story, subStories: [...story.subStories, newStory] };
+    handleEditStory(editedStory, index);
+  }
+
+  const handleEditSubStory = (newStory: IStory, i: number) => {
+    const editedStory = { ...story };
+    editedStory.subStories[i] = newStory;
+    handleEditStory(editedStory, index);
+  }
+
+  const removeSubStory = (id: string) => {
+    const updSubStories = story.subStories.filter(subStory => subStory.id !== id);
+    const editedStory = { ...story, subStories: updSubStories };
+    handleEditStory(editedStory, index);
+  }
+
+  const removeSubStories = (index: number) => {
+    const updSubStories = [...story.subStories];
+
+    updSubStories[index].subStories = [];
+    const editedStory = { ...story, subStories: updSubStories };
+    handleEditStory(editedStory, index);
+  }
+
+  const handleMoveSubStories = (currIndex: number, newIndex: number) => {
+    const updSubStories = [...story.subStories];
+    const oldOrderId = updSubStories[currIndex].orderId;
+    updSubStories[currIndex].orderId = updSubStories[newIndex].orderId;
+    updSubStories[newIndex].orderId = oldOrderId;
+
+    const editedStory = { ...story, subStories: updSubStories };
     handleEditStory(editedStory, index);
   }
 
@@ -94,6 +125,13 @@ export const Story = ({
         </div>
       </div>
       <div ref={listRef} className={story.subStories.length ? ["my-2 ml-7"].join(" ").trim() : "ml-7"}>
+        <SubList
+          subStories={story.subStories}
+          handleEditStory={handleEditSubStory}
+          handleMoveSubStory={handleMoveSubStories}
+          handleRemoveSubStory={removeSubStory}
+          handleRemoveSubStories={removeSubStories}
+        />
         {isInputOpen &&
           <div className="mt-2">
             <StoryAddInput
