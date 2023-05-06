@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { IStory } from "../../models"
 import { Button, TextField } from "../ui/inputs";
+import { Snackbar } from "../ui/feedback";
+import { XMarkIcon } from "../ui/data-display";
 
 type StoryAddInputProps = {
     prevOrder: number,
@@ -9,12 +11,17 @@ type StoryAddInputProps = {
 
 export const StoryAddInput = ({ prevOrder, handleAddStory }: StoryAddInputProps) => {
 
+    const [isSnackbarOpen, setIsSnackbarOpen] = useState<boolean>(false);
     const [newStory, setNewStory] = useState<IStory>({
         id: '',
         orderId: prevOrder + 1,
         title: '',
         subStories: []
     });
+
+    const handleCloseSnackbar = () => {
+        setIsSnackbarOpen(false);
+    }
 
     const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') handleClickAdd();
@@ -30,7 +37,7 @@ export const StoryAddInput = ({ prevOrder, handleAddStory }: StoryAddInputProps)
 
     const handleClickAdd = () => {
         if (newStory.title.trim() === '') {
-            // TODO Snackbar
+            setIsSnackbarOpen(true);
             return;
         }
 
@@ -55,6 +62,21 @@ export const StoryAddInput = ({ prevOrder, handleAddStory }: StoryAddInputProps)
                 onKeyUp={handleEnterPress}
             />
             <Button onClick={handleClickAdd}>Add</Button>
+            <Snackbar
+                isOpen={isSnackbarOpen}
+                title={(
+                    <div className="flex justify-between items-center gap-2">
+                        <p>Story title cannot be empty</p>
+                        <XMarkIcon
+                            disableRipple
+                            strokeColor="#a92323"
+                            className="cursor-pointer"
+                            onClick={handleCloseSnackbar}
+                        />
+                    </div>
+                )}
+                onClose={handleCloseSnackbar}
+            />
         </div>
     )
 }

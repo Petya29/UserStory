@@ -1,0 +1,13 @@
+.snackbar-paper {
+    z-index: 1050;
+    position: fixed;
+    top: 2%;
+    left: -100%;
+    transition: all 350ms ease;
+    width: fit-content;
+    margin-left: 2%;
+}
+
+.snackbar-paper-active {
+    left: -0%;
+}

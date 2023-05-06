@@ -5,6 +5,7 @@ import { DocumentMinusIcon } from "./icons/DocumentMinusIcon";
 import { MinusIcon } from "./icons/MinusIcon";
 import { PlusIcon } from "./icons/PlusIcon";
 import { TrashIcon } from "./icons/TrashIcon";
+import { XMarkIcon } from "./icons/XMarkIcon";
 
 export {
     Divider,
@@ -13,5 +14,6 @@ export {
     PlusIcon,
     TrashIcon,
     MinusIcon,
-    DocumentMinusIcon
+    DocumentMinusIcon,
+    XMarkIcon
 }
