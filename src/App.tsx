@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { dbCheck } from "./db";
+import { Board } from "./components/Board";
 
 function App() {
 
@@ -8,9 +9,9 @@ function App() {
   }, []);
 
   return (
-    <>
-      APP
-    </>
+    <main className="flex justify-center">
+      <Board />
+    </main>
   )
 }
 

@@ -1,6 +1,7 @@
 import { Divider } from "./Divider";
 import { ArrowDownIcon } from "./icons/ArrowDownIcon";
 import { ArrowUpIcon } from "./icons/ArrowUpIcon";
+import { DocumentMinusIcon } from "./icons/DocumentMinusIcon";
 import { MinusIcon } from "./icons/MinusIcon";
 import { PlusIcon } from "./icons/PlusIcon";
 import { TrashIcon } from "./icons/TrashIcon";
@@ -11,5 +12,6 @@ export {
     ArrowUpIcon,
     PlusIcon,
     TrashIcon,
-    MinusIcon
+    MinusIcon,
+    DocumentMinusIcon
 }
